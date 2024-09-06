@@ -9,8 +9,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
-
-# En este bloque cargá los paquetes que vas a necesitar
+library(tidyverse)
+library(ggplot2)
 
 ```
 
@@ -35,30 +35,33 @@ Además de escribir el código para generar el gráfico, escribí como mínimo u
 ¿Qué conclusión sacás?
 
 ```{r}
-ggplot(millas, aes(____, ____)) +
-  geom_____()
+ggplot(millas, aes(cilindros, autopista)) +
+  geom_point()
 ```
-
+A mas cilindros, menor eficiencia en autopista.
 
 2. Hacé un gráfico similar pero de "autopista" versus "ciudad". 
 
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad)) +
+  geom_point()
 ```
-
+Existe una relacion positiva entre estas 2 variables. La eficiencia en la ciudad es menor que en la autopista. 
 
 3. ¿Qué pasa cuando haces un gráfico de  de "clase" versus "traccion"? ¿Por qué no es útil este gráfico?
 
 ```{r}
-
+ggplot(millas, aes(clase, traccion)) +
+  geom_point()
 ```
-
+Al estar comparando 2 variables categóricas este tipo de grafico no resulta útil.
 
 4. En otro bloque, rehacé el gráfico de "autopista" versus "ciudad" pero ahora asigná la variable "tracción" al color de los puntos. 
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad)) +
+  geom_point(aes(color = traccion))
 ```
 
 
