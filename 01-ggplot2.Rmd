@@ -63,30 +63,27 @@ Al estar comparando 2 variables categóricas este tipo de grafico no resulta út
 ggplot(millas, aes(autopista, ciudad)) +
   geom_point(aes(color = traccion))
 ```
-
-
-5. En otro bloque, rehacé el gráfico de "autopista" versus "ciudad" pero ahora asigná la variable "tracción" al color de los puntos. 
-
-```{r}
-
-```
+Al parecer los autos con traccion delantera son mas eficientes que los de 4 ruedas.
 
 
 5. ¿Qué ocurre si se asigna o mapea una estética a algo diferente del nombre de una variable, como `aes(color = cilindrada < 3)`?
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad)) +
+  geom_point(aes(color = cilindrada < 3))
 ```
-
+Evalua si tienen una cilindrada mayor o menor que 3 y los grafica con distinto color segun si es verdadero o falso.
 
 
 6. ¿Notás algún problema con los gráfico anterior? Pensá en qué valores toman los datos de `ciudad` y `autopista`, ¿es posible que no haya ningún auto que haga 20.3 millas por galón en autopista? ¿Qué problemas puede traer eso? Por ejemplo, mirando el gráfico, ¿cuántos autos existe que hagan 20 millas en autopista y 15 en ciudad? 
 
+Los datos toman un valor entero, por lo cual varios de ellos pueden tomar el mismo valor, resultando imposible distinguirlos.
 
 7. En el gráfico anterior, reemplazá `geom_point()` por `geom_jitter()`. ¿Qué es lo que sucede? (Podés fijate en la ayuda de `geom_jitter()` si no entendés qué es lo que hace.) 
 ¿Qué ventajas y desventajas tiene este geom?
 
 ```{r}
-
+ggplot(millas, aes(autopista, ciudad)) +
+  geom_jitter(aes(color = cilindrada < 3))
 ```
-
+Esta funcion separa los puntos para lograr una mejor visualizacion de los datos. Pero como tiene este beneficio tambien tiene una desventaja: que al mover los puntos se pierde el valor exacto de este.
