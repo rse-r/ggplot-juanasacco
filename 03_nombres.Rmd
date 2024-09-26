@@ -1,6 +1,6 @@
 ---
 title: "Ejercicios"
-author: "nombre"
+author: "Juana Sacco"
 date: "2024-08-01"
 output: html_document
 ---
@@ -20,28 +20,45 @@ nombres <- datos::nombres
 1. Calculá cuantos bebés de cada sexo fueron llamados "Mary" o "Kerry". 
 
 ```{r}
-
+nombres |> 
+  filter(nombre %in% c("Mary", "Kerry")) |> 
+  group_by(sexo, nombre) |> 
+  summarise(cantidad = sum(n)) |> 
+  arrange(nombre)
 ```
-
 
 2. Calculá la cantidad de bebés de cada sexo llamado "Mary" para cada año y hacé un gráfico donde el eje x sea el año, el eje y la cantidad de nacidos y haya una linea de color distinto para cada sexo.
 
 
 ```{r}
-
+nombres |> 
+  filter(nombre == "Mary") |> 
+  group_by(sexo, anio) |> 
+  summarise(cantidad = sum(n)) |> 
+  ggplot(aes(anio, cantidad)) +
+  geom_line(aes(color = sexo))
 ```
 
 3. Repetí el gráfico anterior para el nombre "Kerry".
 
 ```{r}
-
+nombres |> 
+  filter(nombre == "Kerry") |> 
+  group_by(sexo, anio) |> 
+  summarise(cantidad = sum(n)) |> 
+  ggplot(aes(anio, cantidad)) +
+  geom_line(aes(color = sexo))
 ```
 
 
 4. ¿Cuál fue la proporción máxima para cada sexo en cada año? Hacé un gráfico mostrando la evolución de eta variable. (podés calcular el máximo con `max(prop)`)
 
 ```{r}
-
+nombres |> 
+  group_by(anio, sexo) |> 
+  summarise(max_prop = max(prop)) |>
+  ggplot(aes(anio, max_prop)) +
+  geom_line(aes(color = sexo))
 ```
 
 
