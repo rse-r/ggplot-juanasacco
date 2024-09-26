@@ -22,6 +22,8 @@ atmosfera <- datos::atmosfera
 ¿Es una relación lineal más o menos limpia o hay otras cosas “raras”?
 
 ```{r}
+ggplot(atmosfera, aes(presion, temperatura)) +
+  geom_point()
 
 ```
 
@@ -29,7 +31,11 @@ atmosfera <- datos::atmosfera
 2. Calculá la temperatura media de cada mes y visualizalo en un gráfico de líneas.(Es decir, el ciclo anual promedio de temperatura). ¿Cómo describirías el ciclo anual en pocas palabras?
 
 ```{r}
-
+atmosfera |> 
+  group_by(mes) |> 
+  summarise(temperatura = mean(temperatura)) |> 
+  ggplot(aes(mes, temperatura)) +
+  geom_line()
 ```
 
 
@@ -40,7 +46,11 @@ Acordate del tema de los grupos y las líneas.)
 ¿Cómo cambia tu descripción del ciclo anual ahora?
 
 ```{r}
-
+atmosfera |> 
+  group_by(mes, hemisferio = factor(sign(latitud))) |> 
+  summarise(temperatura = mean(temperatura)) |> 
+  ggplot(aes(mes, temperatura)) +
+  geom_line(aes(color = hemisferio))
 ```
 
 
